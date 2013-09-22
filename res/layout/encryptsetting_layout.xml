@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bg" >
+
+        <TextView
+            android:id="@+id/backbtn"
+            style="@style/title_btn_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/back_btn"
+            android:text="返回" />
+
+        <TextView
+            style="@style/title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="密码设置" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <TextView
+            style="@style/passwdsetting_textview_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="旧密码：" />
+
+        <EditText
+            style="@style/common_edit_style"
+            android:id="@+id/oldpasswd_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="textPassword" />
+
+        <TextView
+            style="@style/passwdsetting_textview_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新密码：" />
+
+        <EditText
+            style="@style/common_edit_style"
+            android:id="@+id/newpasswd_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="textPassword" />
+
+        <TextView
+            style="@style/passwdsetting_textview_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认密码：" />
+
+        <EditText
+            style="@style/common_edit_style"
+            android:id="@+id/confirmpasswd_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/commit_passwd_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_text_title_save"
+            android:textColor="@color/black"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="提交" />
+    </LinearLayout>
+
+</LinearLayout>

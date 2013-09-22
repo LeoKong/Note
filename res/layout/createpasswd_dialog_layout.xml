@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <EditText 
+        style="@style/common_edit_style"
+        android:id="@+id/addpasswd_edit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/public_edit_selector"
+        android:hint="请输入5位以上的密码"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        />
+    
+
+</LinearLayout>

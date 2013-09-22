@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="bottom_menu" type="id">false</item>
+    <!-- 颜色画板按钮的id -->
+    <item name="tuya_colorbox_btn" type="id">false</item>
+    <!-- 工具按钮的id -->
+    <item name="tuya_star_btn" type="id">false</item>
+    <!-- 清除键按钮的id -->
+    <item name="tuya_clear_btn" type="id">false</item>
+    <!-- 回删键按钮的id -->
+    <item name="tuya_delete_btn" type="id">false</item>
+    <item name="bottom_viewnote_menu" type="id">false</item>
+    <item name="viewnote_menu_bar" type="id">false</item>
+    <item name="delete" type="id">false</item>
+    <item name="edit" type="id">false</item>
+    
+    <!-- 返回按钮id -->
+    <item type="id" name="backbtn">false</item>
+    
+    
+    <item name="toolbtns" type="id">false</item>
+    <item type="id" name="tuya_view">false</item>
+    <item name="tuya_pen1_btn" type="id">false</item>
+    <item name="tuya_pen2_btn" type="id">false</item>
+    <item name="tuya_pen3_btn" type="id">false</item>
+    <item type="id" name="tuya_erase_btn">false</item>
+    
+    <item type="id" name="graph_drawing_layout">false</item>
+    <item type="id" name="graph_drawing">false</item>
+    
+    <item type="id" name="image_gallery_layout">false</item>
+    <item type="id" name="image_gallery">false</item>
+    
+    <item type="id" name="title_menu">false</item>
+    <item type="id" name="title_text">false</item>
+    <item type="id" name="tuya_save_btn">false</item>
+    <item type="id" name="paint_back_btn">false</item>
+    <item type="id" name="paint_forward_btn">false</item>
+    
+    
+    <item type="id" name="l_text_pensize">false</item>
+    <item type="id" name="r_text_pensize">false</item>
+    <item type="id" name="title_text_pensize">false</item>
+    <item type="id" name="result_pensize">false</item>
+    <item type="id" name="seek_bar_pensize">false</item>
+    
+    <item type="id" name="tuya_bg_import">false</item>
+
+</resources>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal" >
+
+    <!-- 主标题栏 -->
+
+    <RelativeLayout
+        android:id="@+id/title_add"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bg" >
+
+        <TextView
+            android:id="@id/backbtn"
+            style="@style/title_btn_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/back_btn"
+            android:text="返回" />
+
+        <TextView
+            android:id="@+id/savebtn"
+            style="@style/title_btn_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/title_btn"
+            android:padding="5dp"
+            android:text="保存" />
+    </RelativeLayout>
+
+    <!-- 手写输入时的标题栏 -->
+
+    <RelativeLayout
+        android:id="@+id/title_write_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bg"
+        android:visibility="gone" >
+
+        <TextView
+            style="@style/title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="手写输入图形" />
+
+        <TextView
+            android:id="@+id/compelete_writing_btn"
+            style="@style/title_btn_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/back_btn"
+            android:text="完成" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/addlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/title_add"
+        android:background="@drawable/addnote_bg" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- 工具栏 -->
+
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageButton
+                        android:id="@+id/facebtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_btn_bg"
+                        android:padding="5dp"
+                        android:src="@drawable/face" />
+
+                    <ImageButton
+                        android:id="@+id/writingbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_btn_bg"
+                        android:src="@drawable/btn_handwrite" />
+
+                    <ImageButton
+                        android:id="@+id/drawpicbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_btn_bg"
+                        android:src="@drawable/btn_doodle" />
+
+                    <ImageButton
+                        android:id="@+id/importpicbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_btn_bg"
+                        android:src="@drawable/btn_importpic" />
+
+                    <ImageButton
+                        android:id="@+id/recorderbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_btn_bg"
+                        android:src="@drawable/btn_mic" />
+
+                    <ImageButton
+                        android:id="@+id/videobtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_btn_bg"
+                        android:src="@drawable/btn_video" />
+
+                    <ImageButton
+                        android:id="@+id/lockbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_btn_bg"
+                        android:src="@drawable/btn_unlock" />
+
+                    <ImageButton
+                        android:id="@+id/remindbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_btn_bg"
+                        android:src="@drawable/btn_clock" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- 内容输入栏 -->
+
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/contentedit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="开始记事..."
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@null"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/remindtime_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="@color/dark_grey" />
+
+            <!-- 图片list布局 -->
+
+            <LinearLayout
+                android:id="@+id/gallery_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <!-- 分割线 -->
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/light_blue"
+                    android:orientation="vertical" 
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <!-- 画廊 -->
+                <Gallery
+                    android:id="@+id/gallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!-- 分割线 -->
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/light_blue"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical" />
+                
+            </LinearLayout>
+
+            <!-- 录音list布局 -->
+
+            <LinearLayout
+                android:id="@+id/voice_list_add"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp" >
+            </LinearLayout>
+
+            <!-- 视频list布局 -->
+
+            <LinearLayout
+                android:id="@+id/video_list_add"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp" >
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 手写输入布局 -->
+
+    <android.gesture.GestureOverlayView
+        android:id="@+id/gesture"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/title_add"
+        android:gestureColor="@color/sky"
+        android:uncertainGestureColor="#ff0000"
+        android:visibility="gone" >
+    </android.gesture.GestureOverlayView>
+
+</RelativeLayout>

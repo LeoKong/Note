@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_vertical|center" >
+
+        <Button
+            android:id="@+id/lBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/timeswitcher_radio_button"
+            android:gravity="center"
+            android:text="时间"
+            android:textColor="@color/black"
+             />
+
+        <Button
+            android:id="@+id/rBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/timeswitcher_radio_button"
+            android:gravity="center"
+            android:text="日期"
+            android:textColor="@color/black"
+           />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="175dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" 
+        android:orientation="vertical" >
+
+        <!-- date_day_time start -->
+
+        <FrameLayout
+            android:id="@+id/ddt_picker"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+             >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_date" >
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_date"
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2.0"
+                    android:background="@drawable/bg_date_wheel" />
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/ic_date_divider" />
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_hour"
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/bg_date_wheel" />
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/ic_date_divider" />
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_minute"
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/bg_date_wheel" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_date_mask" />
+        </FrameLayout>
+        <!-- date_day_time end -->
+
+
+        <!-- date_ymd start -->
+
+        <FrameLayout
+            android:id="@+id/ymd_picker"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bg_date" >
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_year"
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="4.0"
+                    android:background="@drawable/bg_date_wheel" />
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/ic_date_divider" />
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_month"
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="3.0"
+                    android:background="@drawable/bg_date_wheel" />
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/ic_date_divider" />
+
+                <kankan.wheel.widget.WheelView
+                    android:id="@+id/id_day"
+                    android:layout_width="0.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="5.0"
+                    android:background="@drawable/bg_date_wheel" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_date_mask" />
+        </FrameLayout>
+
+        <!-- date_ymd end -->
+</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:gravity="center" 
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/tvDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                 />
+        </LinearLayout>
+    </LinearLayout>

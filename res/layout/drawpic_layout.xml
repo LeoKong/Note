@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center" >
+
+    <!-- title_menu 头顶菜单 -->
+
+    <LinearLayout
+        android:id="@id/title_menu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/textnote_title_bg_1" >
+ 
+         <!-- title_menu 中 保存键 -->
+        <TextView
+            android:id="@id/tuya_bg_import"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8.0dip"
+            android:layout_marginRight="8.0dip"
+            android:background="@drawable/selector_bg_title_import"
+            android:text="@string/tuya_bg_import"
+            android:textColor="@color/button_text_color"
+            android:gravity="center"
+            android:textSize="15.0sp" />
+         
+         
+		<!-- title_menu 中 回退键 -->
+        <ImageButton
+            android:id="@id/paint_back_btn"
+            style="@style/paint_bottom_bar_button"
+            android:src="@drawable/paint_back_btn" />
+        
+		<!-- title_menu 中 前进键 -->
+        <ImageButton
+            android:id="@id/paint_forward_btn"
+            style="@style/paint_bottom_bar_button"
+            android:src="@drawable/paint_forward_btn" />
+        
+		<!-- title_menu 中 保存键 -->
+        <TextView
+            android:id="@id/tuya_save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8.0dip"
+            android:background="@drawable/selector_text_title_save"
+            android:text="@string/sure"
+            android:textColor="@color/button_text_color"
+            android:gravity="center"
+            android:textSize="15.0sp" />
+    </LinearLayout>
+
+    <!-- 底端按钮位置 -->
+
+    <LinearLayout
+        android:id="@+id/buttomParent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bottom_bar"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@id/bottom_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <!-- 颜色画板的 按钮 -->
+
+            <Button
+                android:id="@id/tuya_colorbox_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:background="@drawable/tool_button_bg"
+                android:clickable="true"
+                android:drawablePadding="-2.0dip"
+                android:drawableTop="@drawable/selector_hw_colorbox_btn"
+                android:gravity="bottom|center"
+                android:includeFontPadding="false"
+                android:paddingBottom="2.0dip"
+                android:paddingTop="0.0dip"
+                android:text="@string/choose_color"
+                android:textColor="@color/white"
+                android:textSize="11.0sp" />
+
+            <!-- 工具栏 的 按钮 -->
+            <Button
+                android:id="@id/tuya_star_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:background="@drawable/tool_button_bg"
+                android:clickable="true"
+                android:drawablePadding="-2.0dip"
+                android:drawableTop="@drawable/selector_tuya_toolbox_btn"
+                android:gravity="bottom|center"
+                android:includeFontPadding="false"
+                android:paddingBottom="2.0dip"
+                android:paddingTop="0.0dip"
+                android:text="@string/choose_tools"
+                android:textColor="@color/white"
+                android:textSize="11.0sp" />
+
+            <!-- 清除键 的 按钮 -->
+
+            <Button
+                android:id="@id/tuya_clear_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:background="@drawable/tool_button_bg"
+                android:clickable="true"
+                android:drawablePadding="-2.0dip"
+                android:drawableTop="@drawable/selector_tuya_clear_btn"
+                android:gravity="bottom|center"
+                android:includeFontPadding="false"
+                android:paddingBottom="2.0dip"
+                android:paddingTop="0.0dip"
+                android:text="@string/choose_clear"
+                android:textColor="@color/white"
+                android:textSize="11.0sp" />
+
+            <!-- 回退键 -->
+
+            <Button
+                android:id="@id/tuya_delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:background="@drawable/tool_button_bg"
+                android:clickable="true"
+                android:drawablePadding="-2.0dip"
+                android:drawableTop="@drawable/selector_hw_delete_btn"
+                android:gravity="bottom|center"
+                android:includeFontPadding="false"
+                android:paddingBottom="2.0dip"
+                android:paddingTop="0.0dip"
+                android:text="@string/choose_backspace"
+                android:textColor="@color/white"
+                android:textSize="11.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 画板位置 -->
+
+    <com.xforce.supernotepad.util.PaintView
+        android:id="@+id/palette"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/buttomParent"
+        android:layout_below="@+id/title_menu"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white" />
+
+    <!-- 颜色栏 弹出框 -->
+
+    <FrameLayout
+        android:id="@id/image_gallery_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttomParent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="54.0dip"
+        android:background="@drawable/bg_tuya_toolbox"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0.0dip"
+            android:scrollbars="none" >
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <GridView
+                    android:id="@id/image_gallery"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@null"
+                    android:columnWidth="50.0dip"
+                    android:drawSelectorOnTop="true"
+                    android:fadingEdge="none"
+                    android:fadingEdgeLength="0.0dip"
+                    android:horizontalSpacing="10.0dip"
+                    android:listSelector="@drawable/selector_empty"
+                    android:numColumns="auto_fit"
+                    android:paddingBottom="3.0dip"
+                    android:paddingLeft="9.0dip"
+                    android:paddingTop="3.0dip"
+                    android:stretchMode="columnWidth" />
+            </FrameLayout>
+        </HorizontalScrollView>
+    </FrameLayout>
+    
+     <!--  graph_drawing 弹出框 开始 -->
+    
+     <FrameLayout
+        android:id="@id/graph_drawing_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttomParent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="54.0dip"
+        android:background="@drawable/bg_tuya_toolbox"
+        android:visibility="gone" >
+        
+        <RelativeLayout
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content" />
+        
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0.0dip"
+            android:scrollbars="none" >
+            
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+                
+            <GridView
+                    android:id="@id/graph_drawing"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@null"
+                    android:columnWidth="50.0dip"
+                    android:drawSelectorOnTop="true"
+                    android:fadingEdge="none"
+                    android:fadingEdgeLength="0.0dip"
+                    android:horizontalSpacing="10.0dip"
+                    android:listSelector="@drawable/selector_empty"
+                    android:numColumns="auto_fit"
+                    android:paddingBottom="3.0dip"
+                    android:paddingLeft="9.0dip"
+                    android:paddingTop="3.0dip"
+                    android:stretchMode="columnWidth" />    
+                
+            </FrameLayout>       
+        </HorizontalScrollView>      
+     </FrameLayout>
+    
+    
+    <!--  graph_drawing 弹出框 结束 -->
+    
+    
+
+    <!-- 工具栏 弹出框 -->
+
+    <LinearLayout
+        android:id="@id/toolbtns"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttomParent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="54.0dip"
+        android:background="@drawable/bg_text_toolbox"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="4.0dip"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@id/toolbtns"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_text_toolbox"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="4.0dip" >
+
+            <!-- 铅笔 的 按钮 -->
+            <ImageButton
+                android:id="@id/tuya_pen1_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_tuya_pen1_normal"
+                android:src="@drawable/selector_tuya_toolbox_item_btn" />
+            
+			<!-- 颜料笔 的 按钮 -->
+            <ImageButton
+                android:id="@id/tuya_pen2_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_tuya_pen2_normal"
+                android:src="@drawable/selector_tuya_toolbox_item_btn" />
+            
+			<!-- 涂料画笔 的 按钮 -->
+            <ImageButton
+                android:id="@id/tuya_pen3_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_tuya_pen3_normal"
+                android:src="@drawable/selector_tuya_toolbox_item_btn" />
+
+            <!-- 橡皮差的 按钮 
+            <ImageButton
+                android:id="@id/tuya_erase_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/btn_tuya_erase_normal"
+                android:src="@drawable/selector_tuya_toolbox_item_btn" />
+			 -->
+			 
+            <!-- 显示画笔粗细 的 文字提示（左） -->
+            <TextView
+                android:id="@id/title_text_pensize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:text="@string/title_pensize"
+                android:textColor="@color/title_text_color"
+                android:textSize="15.0sp" />
+
+            <!-- 显示画笔粗细 的 文字提示（右） -->
+            <TextView
+                android:id="@id/result_pensize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:text="0dp"
+                android:textColor="@color/title_text_color"
+                android:textSize="15.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/toolbtns"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_text_toolbox"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="4.0dip" >
+
+            <!-- 滚动条 左侧文字 -->
+            <TextView
+                android:id="@id/l_text_pensize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/l_text"
+                android:textColor="@color/title_text_color"
+                android:textSize="15.0sp" />
+
+            <!-- 滚动条  -->
+            <SeekBar
+                android:id="@id/seek_bar_pensize"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:max="100"
+                android:progress="10"
+                android:progressDrawable="@layout/seekbar_style"
+                />
+
+            <!-- 滚动条  右侧文字-->
+            <TextView
+                android:id="@id/r_text_pensize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="@string/r_text"
+                android:textColor="@color/title_text_color"
+                android:textSize="15.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

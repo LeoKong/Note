@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">XNote</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">XNote</string>
+    
+    <string name="choose_color">颜色</string>
+	<string name="choose_tools">画笔</string>
+	<string name="choose_clear">清空</string>
+	<string name="choose_backspace">图形</string>
+	
+	<string name="sure">保存</string>
+	<string name="l_text">细</string>
+	<string name="r_text">粗</string>
+	<string name="title_pensize">画笔粗细:</string>
+	<string name="tuya_bg_import">导入</string>
+	
+	<string name="poster_url">http://d.hiphotos.bdimg.com/album/w%3D1600%3Bq%3D90/sign=a2235c188b13632715edc635a1bf9b9d/b2de9c82d158ccbfdf7d75fe18d8bc3eb0354135.jpg</string>
+	
+</resources>

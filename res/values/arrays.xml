@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="selecthandle">
+        <item>编辑分组</item>
+        <item>删除分组</item>
+    </string-array>
+    <string-array name="face_textstyle">
+        <item>[face01]</item>
+        <item>[face02]</item>
+        <item>[face03]</item>
+        <item>[face04]</item>
+        <item>[face05]</item>
+        <item>[face06]</item>
+        <item>[face07]</item>
+        <item>[face08]</item>
+        <item>[face09]</item>
+        <item>[face10]</item>
+        <item>[face11]</item>
+        <item>[face12]</item>
+        <item>[face13]</item>
+        <item>[face14]</item>
+        <item>[face15]</item>
+        <item>[face16]</item>
+        <item>[face17]</item>
+        <item>[face18]</item>
+        <item>[face19]</item>
+        <item>[face20]</item>
+        <item>[face21]</item>
+        <item>[face22]</item>
+        <item>[face23]</item>
+        <item>[face24]</item>
+        <item>[face25]</item>
+        <item>[face26]</item>
+        <item>[face27]</item>
+        <item>[face28]</item>
+        <item>[face29]</item>
+        <item>[face30]</item>
+        <item>[face31]</item>
+        <item>[face32]</item>
+        <item>[face33]</item>
+        <item>[face34]</item>
+        <item>[circle]</item>
+        <item>[square]</item>
+        <item>[rectangle]</item>
+        <item>[love]</item>
+    </string-array>
+
+</resources>

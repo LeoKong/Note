@@ -1,0 +1,13 @@
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android"
+>
+  <item
+    android:id="@+android:id/background"
+    />
+  <item
+    android:id="@+android:id/SecondaryProgress"
+     />
+  <item
+    android:id="@+android:id/progress"
+     />
+</layer-list>
