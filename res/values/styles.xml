@@ -61,6 +61,20 @@
         <item name="android:layout_weight">1.0</item>
     </style>
     
+    <!-- 日历上的星期名 -->
+    <style name="dayofweek">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/light_grey</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <!-- 切换日历月份的按钮 -->
+    <style name="monthbtn">
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <!-- 闹钟提示 -->
     <style name="AlarmDialog" parent="@android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item> 

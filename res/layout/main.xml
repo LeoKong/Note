@@ -68,6 +68,13 @@
                 android:text="个性化"
                 android:textColor="#ffffff"
                 android:textSize="15sp" />
+            
+            <Button
+                android:id="@+id/calendarbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="日历浏览" />
 
             <Button
                 android:id="@+id/passwdbtn_sidebar"

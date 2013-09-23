@@ -96,8 +96,8 @@ public class MainActivity extends Activity implements OnClickListener,
 			startSearchButton, voiceSearchButton;// 显示侧栏按钮，添加记事本按钮，添加新组按钮，开始搜索按钮，语音输入按钮
 	private ImageButton deleteButton, shareButton, moveButton, lockedButton,
 			unlockedButton;// 删除按钮，分享按钮，移动按钮,加锁按钮
-	private Button showSearchButton, passwdButton, feedbackButton,
-			shareAppButton, aboutButton;// 侧栏中搜索按钮，密码管理按钮，反馈按钮，分享应用按钮，关于按钮
+	private Button showSearchButton, calendarButton,passwdButton, feedbackButton,
+			shareAppButton, aboutButton;// 侧栏中搜索按钮，日历浏览按钮，密码管理按钮，反馈按钮，分享应用按钮，关于按钮
 	private ImageButton changeOrderButton;// 改变记事本排序方式按钮
 
 	private USCRecognizerDialog voiceRecognizerDialog;// 语音识别框
@@ -263,6 +263,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		noteListView = (ListView) findViewById(R.id.notelist);
 		showEmptyView = (LinearLayout) findViewById(R.id.showempty_view);
 		showSearchButton = (Button) findViewById(R.id.searchbtn_sidebar);
+		calendarButton=(Button) findViewById(R.id.calendarbtn_sidebar);
 		passwdButton = (Button) findViewById(R.id.passwdbtn_sidebar);
 		feedbackButton = (Button) findViewById(R.id.feedbackbtn_sidebar);
 		shareAppButton = (Button) findViewById(R.id.shareappbtn_sidebar);
@@ -282,6 +283,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		unlockedButton.setOnClickListener(this);
 		showSearchButton.setOnClickListener(this);
 		startSearchButton.setOnClickListener(this);
+		calendarButton.setOnClickListener(this);
 		passwdButton.setOnClickListener(this);
 		feedbackButton.setOnClickListener(this);
 		shareAppButton.setOnClickListener(this);
@@ -495,6 +497,11 @@ public class MainActivity extends Activity implements OnClickListener,
 				}
 
 			}
+			break;
+			
+		case R.id.calendarbtn_sidebar:
+			intent=new Intent(MainActivity.this, CalendarActivity.class);
+			startActivity(intent);
 			break;
 
 		case R.id.passwdbtn_sidebar:

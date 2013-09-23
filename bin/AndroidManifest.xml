@@ -86,6 +86,10 @@
             android:name=".AlarmDialogActivity"
             android:theme="@style/AlarmDialog" >
         </activity>
+        <activity
+            android:name=".CalendarActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         
         <!--分享编辑页-->
         <activity
