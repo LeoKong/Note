@@ -84,6 +84,10 @@ public class MainActivity extends Activity implements OnClickListener,
 	private static final int SELECT_GROUP = 6;// 选择需要移动到的分组框
 	private static final int CREATE_PASSWD = 7;// 创建密码输入框
 	private static final int INPUT_PASSWD = 8;// 输入密码框
+
+	private static final int CALENDAR = 9;// calendar的activity的标识符
+	private static final int ADDNOTE = 10;// AddActivity的标识符
+	private static final int EDITNOTE = 11;//EditActivity的标识符
 	private RelativeLayout editTopLayout, searchTitle;
 	private LinearLayout bottomLayout;// 底部选择操作布局
 	private ListView noteListView;
@@ -96,8 +100,8 @@ public class MainActivity extends Activity implements OnClickListener,
 			startSearchButton, voiceSearchButton;// 显示侧栏按钮，添加记事本按钮，添加新组按钮，开始搜索按钮，语音输入按钮
 	private ImageButton deleteButton, shareButton, moveButton, lockedButton,
 			unlockedButton;// 删除按钮，分享按钮，移动按钮,加锁按钮
-	private Button showSearchButton, calendarButton,passwdButton, feedbackButton,
-			shareAppButton, aboutButton;// 侧栏中搜索按钮，日历浏览按钮，密码管理按钮，反馈按钮，分享应用按钮，关于按钮
+	private Button showSearchButton, calendarButton, passwdButton,
+			feedbackButton, shareAppButton, aboutButton;// 侧栏中搜索按钮，日历浏览按钮，密码管理按钮，反馈按钮，分享应用按钮，关于按钮
 	private ImageButton changeOrderButton;// 改变记事本排序方式按钮
 
 	private USCRecognizerDialog voiceRecognizerDialog;// 语音识别框
@@ -146,6 +150,9 @@ public class MainActivity extends Activity implements OnClickListener,
 
 		// 初始化控件
 		initWidget();
+		// adapter绑定list
+		noteList = noteDetailDao.getAllNoteForListView(currentGroupIndex,
+				orderString);
 
 		// 初始化用户反馈
 		agent = new FeedbackAgent(this);
@@ -195,35 +202,58 @@ public class MainActivity extends Activity implements OnClickListener,
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (!editmodel) {
-			showListView();
-		}
 		// 初始化gallery的索引值
 		AddNoteActivity.GALLERY_INDEX = 0;
 		// 开启友盟统计
-		MobclickAgent.onResume(this);
+//		 MobclickAgent.onResume(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		// 停止友盟统计
-		MobclickAgent.onPause(this);
+//		 MobclickAgent.onPause(this);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		/**
-		 * 使用SSO必须添加，指定获取授权信息的回调页面，并传给SDK进行处理
-		 */
-		UMSsoHandler sinaSsoHandler = umSocialService.getConfig()
-				.getSinaSsoHandler();
-		if (sinaSsoHandler != null
-				&& requestCode == UMSsoHandler.DEFAULT_AUTH_ACTIVITY_CODE) {
-			sinaSsoHandler.authorizeCallBack(requestCode, resultCode, data);
+		switch (requestCode) {
+		case CALENDAR:
+			if (resultCode == RESULT_OK) {
+				List<Map<String, Object>> list = (List<Map<String, Object>>) data
+						.getSerializableExtra("list");
+				showListView(list);
+			}
+			break;
+			
+		case ADDNOTE:
+			if (resultCode == RESULT_OK) {
+				showListView();
+			}
+			break;
+			
+		case EDITNOTE:
+			if (resultCode == RESULT_OK) {
+				showListView();
+			}
+			break;
+
+		default:
+			/**
+			 * 使用SSO必须添加，指定获取授权信息的回调页面，并传给SDK进行处理
+			 */
+			UMSsoHandler sinaSsoHandler = umSocialService.getConfig()
+					.getSinaSsoHandler();
+			if (sinaSsoHandler != null
+					&& requestCode == UMSsoHandler.DEFAULT_AUTH_ACTIVITY_CODE) {
+				sinaSsoHandler.authorizeCallBack(requestCode, resultCode, data);
+			}
+			break;
 		}
+
 	}
 
 	/**
@@ -263,7 +293,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		noteListView = (ListView) findViewById(R.id.notelist);
 		showEmptyView = (LinearLayout) findViewById(R.id.showempty_view);
 		showSearchButton = (Button) findViewById(R.id.searchbtn_sidebar);
-		calendarButton=(Button) findViewById(R.id.calendarbtn_sidebar);
+		calendarButton = (Button) findViewById(R.id.calendarbtn_sidebar);
 		passwdButton = (Button) findViewById(R.id.passwdbtn_sidebar);
 		feedbackButton = (Button) findViewById(R.id.feedbackbtn_sidebar);
 		shareAppButton = (Button) findViewById(R.id.shareappbtn_sidebar);
@@ -308,15 +338,11 @@ public class MainActivity extends Activity implements OnClickListener,
 		// 初始化所有的记事本并显示
 		noteDetailDao = new NoteDetailDao(MainActivity.this);
 
-		// 显示listnote
-		showListView();
-
 		// 显示当前时间
 		showNowDate();
 
 		// 创建需要用到的文件夹
 		createDir();
-
 	}
 
 	/**
@@ -374,7 +400,6 @@ public class MainActivity extends Activity implements OnClickListener,
 	public void showListView() {
 		noteList = noteDetailDao.getAllNoteForListView(currentGroupIndex,
 				orderString);
-
 		if (noteList.size() > 0) {
 			listAdapter = new MyListAdapter(this, noteList);
 			noteListView.setVisibility(View.VISIBLE);
@@ -387,7 +412,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * 根据给定list显示listview内容,用于搜索时
+	 * 根据给定list显示listview内容
 	 * 
 	 * @param list
 	 */
@@ -410,7 +435,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		case R.id.addnotebtn:
 			intent = new Intent(MainActivity.this, AddNoteActivity.class);
 			intent.putExtra("index", currentGroupIndex);
-			startActivity(intent);
+			startActivityForResult(intent, ADDNOTE);
 			break;
 
 		case R.id.addtype_btn:
@@ -498,10 +523,15 @@ public class MainActivity extends Activity implements OnClickListener,
 
 			}
 			break;
-			
+
 		case R.id.calendarbtn_sidebar:
-			intent=new Intent(MainActivity.this, CalendarActivity.class);
-			startActivity(intent);
+			// 收起侧栏
+			mSlideHolder.toggle();
+			// 选中“全部”
+			SelectOneType(0);
+			intent = new Intent(MainActivity.this, CalendarActivity.class);
+			startActivityForResult(intent, CALENDAR);
+
 			break;
 
 		case R.id.passwdbtn_sidebar:
@@ -540,15 +570,15 @@ public class MainActivity extends Activity implements OnClickListener,
 
 			// 添加微信平台
 			umSocialService.getConfig().supportWXPlatform(MainActivity.this);
-			
-			 // 添加微信朋友圈
-			 umSocialService.getConfig().supportWXPlatform(
-			 MainActivity.this,
-			 UMServiceFactory.getUMWXHandler(MainActivity.this)
-			 .setToCircle(true));
-			 //微信图文分享必须设置一个url,默认"http://www.umeng.com"
-			 UMWXHandler.CONTENT_URL = getString(R.string.poster_url);
-			
+
+			// 添加微信朋友圈
+			umSocialService.getConfig().supportWXPlatform(
+					MainActivity.this,
+					UMServiceFactory.getUMWXHandler(MainActivity.this)
+							.setToCircle(true));
+			// 微信图文分享必须设置一个url,默认"http://www.umeng.com"
+			UMWXHandler.CONTENT_URL = getString(R.string.poster_url);
+
 			umSocialService.openShare(MainActivity.this, false);
 			break;
 
@@ -1036,7 +1066,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	}
 
 	/**
-	 * 让某一个分组为当前选中状态
+	 * 让某一个分组为当前选中状态，然后会调用check的监听
 	 * 
 	 * @param id
 	 */
@@ -1371,7 +1401,7 @@ public class MainActivity extends Activity implements OnClickListener,
 						EditNoteActivity.class);
 				intent.putExtra("nid", noteList.get(position).get("nid")
 						.toString());
-				startActivity(intent);
+				startActivityForResult(intent, EDITNOTE);
 			}
 
 		}

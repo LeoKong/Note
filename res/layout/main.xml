@@ -19,7 +19,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/nowdate_tv"
+                android:id="@id/nowdate_tv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
@@ -28,7 +28,7 @@
                 android:textSize="15sp" />
             
             <Button
-                android:id="@+id/searchbtn_sidebar"
+                android:id="@id/searchbtn_sidebar"
                 style="@style/sidebar_btn_style"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:textSize="15sp" />
 
             <RadioGroup
-                android:id="@+id/typegroup"
+                android:id="@id/typegroup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
@@ -54,7 +54,7 @@
             </RadioGroup>
 
             <ImageButton
-                android:id="@+id/addtype_btn"
+                android:id="@id/addtype_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/radiobtn_selector"
@@ -70,35 +70,42 @@
                 android:textSize="15sp" />
             
             <Button
-                android:id="@+id/calendarbtn_sidebar"
+                android:id="@id/calendarbtn_sidebar"
                 style="@style/sidebar_btn_style"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="日历浏览" />
+            
+            <Button
+                android:id="@id/albumbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="图片相册" />
 
             <Button
-                android:id="@+id/passwdbtn_sidebar"
+                android:id="@id/passwdbtn_sidebar"
                 style="@style/sidebar_btn_style"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="密码管理" />
             
             <Button
-                android:id="@+id/feedbackbtn_sidebar"
+                android:id="@id/feedbackbtn_sidebar"
                 style="@style/sidebar_btn_style"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="用户反馈" />
             
             <Button
-                android:id="@+id/shareappbtn_sidebar"
+                android:id="@id/shareappbtn_sidebar"
                 style="@style/sidebar_btn_style"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="一键分享" />
             
             <Button
-                android:id="@+id/aboutbtn_sidebar"
+                android:id="@id/aboutbtn_sidebar"
                 style="@style/sidebar_btn_style"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -118,13 +125,13 @@
 
         <!-- 主标题栏 -->
         <RelativeLayout
-            android:id="@+id/main_top_title"
+            android:id="@id/main_top_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/title_bg" >
 
             <ImageButton
-                android:id="@+id/seeallbtn"
+                android:id="@id/seeallbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -134,7 +141,7 @@
                 android:src="@drawable/see_all" />
 
             <TextView
-                android:id="@+id/showtype"
+                android:id="@id/showtype"
                 style="@style/title_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -142,7 +149,7 @@
                 android:text="全部" />
             
             <ImageButton
-                android:id="@+id/changebtn"
+                android:id="@id/changebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -150,7 +157,7 @@
                 android:background="@drawable/change_order_btn_selector" />
 
             <ImageButton
-                android:id="@+id/addnotebtn"
+                android:id="@id/addnotebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -172,14 +179,14 @@
         <!-- 显示多选的标题栏 -->
 
         <RelativeLayout
-            android:id="@+id/edit_top_title"
+            android:id="@id/edit_top_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/title_bg"
             android:visibility="gone" >
 
             <TextView
-                android:id="@+id/showselect"
+                android:id="@id/showselect"
                 style="@style/title_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -189,7 +196,7 @@
         <!-- 搜索栏 -->
         
         <RelativeLayout
-            android:id="@+id/main_top_search"
+            android:id="@id/main_top_search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/title_bg"
@@ -198,14 +205,14 @@
             android:visibility="gone" >
             
             <ImageButton
-                android:id="@+id/voice_search_btn"
+                android:id="@id/voice_search_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/voice_search_btn_selector" />
 
             <EditText
-                android:id="@+id/edittext_search"
+                android:id="@id/edittext_search"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/startsearch_btn"
@@ -217,7 +224,7 @@
                 android:singleLine="true" />
 
             <ImageButton
-                android:id="@+id/startsearch_btn"
+                android:id="@id/startsearch_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -227,7 +234,7 @@
         <!-- 当无记事本时显示 -->
 
         <LinearLayout
-            android:id="@+id/showempty_view"
+            android:id="@id/showempty_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
@@ -253,7 +260,7 @@
 
         <ListView
             android:layout_marginTop="10dp"
-            android:id="@+id/notelist"
+            android:id="@id/notelist"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:layout_width="fill_parent"
@@ -267,7 +274,7 @@
         <!-- 多选操作的底部栏 -->
 
         <LinearLayout
-            android:id="@+id/main_bottom"
+            android:id="@id/main_bottom"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -284,7 +291,7 @@
                 android:gravity="center" >
 
                 <ImageButton
-                    android:id="@+id/move_btn_main"
+                    android:id="@id/move_btn_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -298,7 +305,7 @@
                 android:gravity="center" >
 
                 <ImageButton
-                    android:id="@+id/delete_btn_main"
+                    android:id="@id/delete_btn_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -313,7 +320,7 @@
                 android:gravity="center" >
 
                 <ImageButton
-                    android:id="@+id/share_btn_main"
+                    android:id="@id/share_btn_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -327,7 +334,7 @@
                 android:gravity="center" >
 
                 <ImageButton
-                    android:id="@+id/locked_btn_main"
+                    android:id="@id/locked_btn_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -341,7 +348,7 @@
                 android:gravity="center" >
 
                 <ImageButton
-                    android:id="@+id/unlocked_btn_main"
+                    android:id="@id/unlocked_btn_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

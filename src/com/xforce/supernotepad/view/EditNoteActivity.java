@@ -121,6 +121,7 @@ public class EditNoteActivity extends AddNoteActivity {
 
 			Toast.makeText(EditNoteActivity.this, "记事本修改成功！", Toast.LENGTH_LONG)
 			.show();
+			setResult(RESULT_OK);
 			EditNoteActivity.this.finish();
 		}
 	};

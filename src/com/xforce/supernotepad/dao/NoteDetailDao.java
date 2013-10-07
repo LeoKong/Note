@@ -93,6 +93,7 @@ public class NoteDetailDao {
 			noteDetail.setLocked(cursor.getInt(5));
 		}
 
+		cursor.close();
 		return noteDetail;
 	}
 
@@ -137,6 +138,8 @@ public class NoteDetailDao {
 			searchList.add(map);
 
 		}
+
+		cursor.close();
 		return searchList;
 
 	}
@@ -178,7 +181,7 @@ public class NoteDetailDao {
 
 			list.add(map);
 		}
-
+		cursor.close();
 		return list;
 	}
 
@@ -224,17 +227,19 @@ public class NoteDetailDao {
 		sqLiteDatabase
 				.update("tb_note", values, "n_id=?", new String[] { nid });
 	}
-	
+
 	/**
 	 * 更新一个记事本的加锁状态
+	 * 
 	 * @param nid
 	 * @param lock
 	 */
-	public void updateNoteLock(String nid,int lock){
-		ContentValues values=new ContentValues();
+	public void updateNoteLock(String nid, int lock) {
+		ContentValues values = new ContentValues();
 		values.put("locked", lock);
-		sqLiteDatabase.update("tb_note", values, "n_id=?", new String[]{nid});
-		
+		sqLiteDatabase
+				.update("tb_note", values, "n_id=?", new String[] { nid });
+
 	}
 
 	/**
@@ -257,6 +262,72 @@ public class NoteDetailDao {
 		values.put("locked", locked);
 		sqLiteDatabase.update("tb_note", values, "n_id=?", new String[] { nid
 				+ "" });
+
+	}
+
+	/**
+	 * 检查该日期下是否有记事
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public boolean checkHasNote(String date) {
+		Cursor cursor = null;
+		try {
+			cursor = sqLiteDatabase.rawQuery(
+					"select n_id from tb_note where Ctime=? limit 1",
+					new String[] { date });
+			if (cursor.moveToNext()) {
+				return true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			if (cursor != null)
+				cursor.close();
+		}
+
+		return false;
+	}
+
+	
+	/**
+	 * 返回该日期下所有记事
+	 * @param dateString
+	 * @return
+	 */
+	public List<Map<String, Object>> getAllNoteFromDate(String dateString) {
+		Cursor cursor = null;
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		try {
+			cursor = sqLiteDatabase.query("tb_note", null, "Ctime=?",
+					new String[] { dateString }, null, null, null);
+			
+			while (cursor.moveToNext()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("nid", cursor.getInt(0));
+				map.put("content", cursor.getString(4));
+				map.put("date", cursor.getString(2));
+				map.put("locked", cursor.getInt(5));
+				map.put("remind", cursor.getString(3));
+				map.put("pic", "");
+
+				List<PictureModel> picList = pictureDao.getPicFromNid(cursor
+						.getInt(0) + "");
+				if (picList.size() > 0) {
+					map.put("pic", picList.get(0).getpName());
+				}
+
+				list.add(map);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+		return list;
 
 	}
 

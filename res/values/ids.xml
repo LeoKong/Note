@@ -18,6 +18,39 @@
     <!-- 返回按钮id -->
     <item type="id" name="backbtn">false</item>
     
+    <!-- 侧栏 -->
+    <item type="id" name="nowdate_tv">false</item>
+    <item type="id" name="searchbtn_sidebar">false</item>
+    <item type="id" name="typegroup">false</item>
+    <item type="id" name="addtype_btn">false</item>
+    <item type="id" name="calendarbtn_sidebar">false</item>
+    <item type="id" name="albumbtn_sidebar">false</item>
+    <item type="id" name="passwdbtn_sidebar">false</item>
+    <item type="id" name="feedbackbtn_sidebar">false</item>
+    <item type="id" name="shareappbtn_sidebar">false</item>
+    <item type="id" name="aboutbtn_sidebar">false</item>
+    <!-- main -->
+    <item type="id" name="main_top_title">false</item>
+    <item type="id" name="seeallbtn">false</item>
+    <item type="id" name="showtype">false</item>
+    <item type="id" name="changebtn">false</item>
+    <item type="id" name="addnotebtn">false</item>
+    <item type="id" name="edit_top_title">false</item>
+    <item type="id" name="showselect">false</item>
+    <item type="id" name="main_top_search">false</item>
+    <item type="id" name="voice_search_btn">false</item>
+    <item type="id" name="edittext_search">false</item>
+    <item type="id" name="startsearch_btn">false</item>
+    <item type="id" name="showempty_view">false</item>
+    <item type="id" name="notelist">false</item>
+    <item type="id" name="main_bottom">false</item>
+    <item type="id" name="move_btn_main">false</item>
+    <item type="id" name="delete_btn_main">false</item>
+    <item type="id" name="share_btn_main">false</item>
+    <item type="id" name="locked_btn_main">false</item>
+    <item type="id" name="unlocked_btn_main">false</item>
+    
+    
     
     <item name="toolbtns" type="id">false</item>
     <item type="id" name="tuya_view">false</item>
@@ -37,7 +70,6 @@
     <item type="id" name="tuya_save_btn">false</item>
     <item type="id" name="paint_back_btn">false</item>
     <item type="id" name="paint_forward_btn">false</item>
-    
     
     <item type="id" name="l_text_pensize">false</item>
     <item type="id" name="r_text_pensize">false</item>

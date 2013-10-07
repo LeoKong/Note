@@ -50,10 +50,8 @@ public class Utils {
 		// 判断路径下文件是否存在
 		if (file.exists()) {
 			// 存在则直接带数据库
-			System.out.println("有");
 			return SQLiteDatabase.openOrCreateDatabase(file, null);
 		} else {
-			System.out.println("没");
 			try {
 				// 不存在则把asset中的数据库导入到指定路径中
 				// 得到资源

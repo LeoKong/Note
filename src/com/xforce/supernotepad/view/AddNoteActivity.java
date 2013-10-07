@@ -1203,6 +1203,7 @@ public class AddNoteActivity extends Activity implements OnClickListener,
 
 			Toast.makeText(AddNoteActivity.this, "记事本添加成功！", Toast.LENGTH_LONG)
 					.show();
+			setResult(RESULT_OK);
 			AddNoteActivity.this.finish();
 
 			break;
