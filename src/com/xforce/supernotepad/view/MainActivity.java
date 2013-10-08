@@ -87,7 +87,7 @@ public class MainActivity extends Activity implements OnClickListener,
 
 	private static final int CALENDAR = 9;// calendar的activity的标识符
 	private static final int ADDNOTE = 10;// AddActivity的标识符
-	private static final int EDITNOTE = 11;//EditActivity的标识符
+	private static final int EDITNOTE = 11;// EditActivity的标识符
 	private RelativeLayout editTopLayout, searchTitle;
 	private LinearLayout bottomLayout;// 底部选择操作布局
 	private ListView noteListView;
@@ -100,8 +100,8 @@ public class MainActivity extends Activity implements OnClickListener,
 			startSearchButton, voiceSearchButton;// 显示侧栏按钮，添加记事本按钮，添加新组按钮，开始搜索按钮，语音输入按钮
 	private ImageButton deleteButton, shareButton, moveButton, lockedButton,
 			unlockedButton;// 删除按钮，分享按钮，移动按钮,加锁按钮
-	private Button showSearchButton, calendarButton, passwdButton,
-			feedbackButton, shareAppButton, aboutButton;// 侧栏中搜索按钮，日历浏览按钮，密码管理按钮，反馈按钮，分享应用按钮，关于按钮
+	private Button showSearchButton, calendarButton, albumButton, passwdButton,
+			feedbackButton, shareAppButton, aboutButton;// 侧栏中搜索按钮，日历浏览按钮，图片相册按钮，密码管理按钮，反馈按钮，分享应用按钮，关于按钮
 	private ImageButton changeOrderButton;// 改变记事本排序方式按钮
 
 	private USCRecognizerDialog voiceRecognizerDialog;// 语音识别框
@@ -205,14 +205,14 @@ public class MainActivity extends Activity implements OnClickListener,
 		// 初始化gallery的索引值
 		AddNoteActivity.GALLERY_INDEX = 0;
 		// 开启友盟统计
-//		 MobclickAgent.onResume(this);
+		// MobclickAgent.onResume(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		// 停止友盟统计
-//		 MobclickAgent.onPause(this);
+		// MobclickAgent.onPause(this);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -228,13 +228,13 @@ public class MainActivity extends Activity implements OnClickListener,
 				showListView(list);
 			}
 			break;
-			
+
 		case ADDNOTE:
 			if (resultCode == RESULT_OK) {
 				showListView();
 			}
 			break;
-			
+
 		case EDITNOTE:
 			if (resultCode == RESULT_OK) {
 				showListView();
@@ -294,6 +294,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		showEmptyView = (LinearLayout) findViewById(R.id.showempty_view);
 		showSearchButton = (Button) findViewById(R.id.searchbtn_sidebar);
 		calendarButton = (Button) findViewById(R.id.calendarbtn_sidebar);
+		albumButton=(Button) findViewById(R.id.albumbtn_sidebar);
 		passwdButton = (Button) findViewById(R.id.passwdbtn_sidebar);
 		feedbackButton = (Button) findViewById(R.id.feedbackbtn_sidebar);
 		shareAppButton = (Button) findViewById(R.id.shareappbtn_sidebar);
@@ -314,6 +315,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		showSearchButton.setOnClickListener(this);
 		startSearchButton.setOnClickListener(this);
 		calendarButton.setOnClickListener(this);
+		albumButton.setOnClickListener(this);  
 		passwdButton.setOnClickListener(this);
 		feedbackButton.setOnClickListener(this);
 		shareAppButton.setOnClickListener(this);
@@ -532,6 +534,11 @@ public class MainActivity extends Activity implements OnClickListener,
 			intent = new Intent(MainActivity.this, CalendarActivity.class);
 			startActivityForResult(intent, CALENDAR);
 
+			break;
+
+		case R.id.albumbtn_sidebar:
+			intent = new Intent(MainActivity.this, AlbumActivity.class);
+			startActivity(intent);
 			break;
 
 		case R.id.passwdbtn_sidebar:

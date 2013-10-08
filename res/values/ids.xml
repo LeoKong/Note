@@ -50,7 +50,7 @@
     <item type="id" name="locked_btn_main">false</item>
     <item type="id" name="unlocked_btn_main">false</item>
     
-    
+    <item type="id" name="album_view">false</item>
     
     <item name="toolbtns" type="id">false</item>
     <item type="id" name="tuya_view">false</item>

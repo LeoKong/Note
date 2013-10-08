@@ -47,6 +47,34 @@ public class PictureDao {
 	}
 	
 	/**
+	 * 获取所有图片
+	 * @return
+	 */
+	public List<PictureModel> getAllPictures(){
+		List<PictureModel> list = new ArrayList<PictureModel>();
+		Cursor cursor=null;
+		try {
+			cursor = sqLiteDatabase.query("tb_pic",
+					new String[] { "p_name","illustration" }, null, null,
+					null, null, null);
+			while (cursor.moveToNext()) {
+				PictureModel pictureModel=new PictureModel();
+				pictureModel.setpName(cursor.getString(0));
+				pictureModel.setIllustration(cursor.getString(1));
+				list.add(pictureModel);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			if (cursor!=null) {
+				cursor.close();
+			}
+		}
+		
+		return list;
+	}
+	
+	/**
 	 * 往一个记事本中添加一个图片
 	 * @param nid 所属记事本id
 	 * @param pictureModel 图片实体
