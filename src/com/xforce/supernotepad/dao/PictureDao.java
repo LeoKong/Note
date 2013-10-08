@@ -56,7 +56,7 @@ public class PictureDao {
 		try {
 			cursor = sqLiteDatabase.query("tb_pic",
 					new String[] { "p_name","illustration" }, null, null,
-					null, null, null);
+					null, null, "p_id desc");
 			while (cursor.moveToNext()) {
 				PictureModel pictureModel=new PictureModel();
 				pictureModel.setpName(cursor.getString(0));
