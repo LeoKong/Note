@@ -21,6 +21,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -537,8 +538,16 @@ public class MainActivity extends Activity implements OnClickListener,
 			break;
 
 		case R.id.albumbtn_sidebar:
-			intent = new Intent(MainActivity.this, AlbumActivity.class);
-			startActivity(intent);
+			PictureDao pictureDao=new PictureDao(this);
+			if (pictureDao.checkHasPic()) {
+				intent = new Intent(MainActivity.this, AlbumActivity.class);
+				startActivity(intent);
+			}else {
+				Toast toast=Toast.makeText(this, "您的记事本中还没有添加相片哦！", Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
+			}
+			
 			break;
 
 		case R.id.passwdbtn_sidebar:

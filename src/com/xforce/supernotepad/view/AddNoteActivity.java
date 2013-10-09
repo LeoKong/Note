@@ -1031,10 +1031,15 @@ public class AddNoteActivity extends Activity implements OnClickListener,
 				message.setData(bundle);
 				handler.sendMessage(message);
 			} finally {
+				// 回收bitmap
+				if (importBmp != null && !importBmp.isRecycled()) {
+					importBmp.recycle();
+				}
 				try {
 					// 关闭输出流
 					fos.flush();
 					fos.close();
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
