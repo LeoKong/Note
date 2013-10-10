@@ -18,3 +18,14 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep public class com.xforce.supernotepad.view.R$*{
+    public static final int *;
+}
+
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+
+-keep public class com.umeng.fb.ui.ThreadView {
+}

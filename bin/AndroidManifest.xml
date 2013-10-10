@@ -7,7 +7,6 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -16,16 +15,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 录音权限 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    
+
     <!-- 用于评论模块分享位置信息 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />  
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 用于评论模块分享位置信息 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -61,7 +54,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
-"
+
         <activity
             android:name=".DrawPicActivity"
             android:screenOrientation="portrait" >
@@ -90,13 +83,12 @@
             android:name=".CalendarActivity"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name=".AlbumActivity"
             android:screenOrientation="portrait" >
         </activity>
-        
-        <!--分享编辑页-->
+
+        <!-- 分享编辑页 -->
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
             android:configChanges="orientation|keyboard"
@@ -108,6 +100,8 @@
 
         <!-- 闹钟广播 -->
         <receiver android:name="com.xforce.supernotepad.service.MyAlarmBroadCast" />
+
+       
 
         <!-- 友盟统计 -->
         <meta-data
@@ -121,6 +115,13 @@
         <!-- umeng反馈 -->
         <activity android:name="com.umeng.fb.ConversationActivity" />
         <activity android:name="com.umeng.fb.ContactActivity" />
+        
+         <!-- 自动更新服务 -->
+        <service
+            android:name="com.umeng.common.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        
         
     </application>
 

@@ -42,10 +42,10 @@
         android:background="@drawable/logo"/>
 
     <TextView
+        android:id="@id/version_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="XNote记事本 V1.0"
         android:textColor="#707070"
         android:textSize="19sp" />
 
@@ -53,14 +53,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="广东海洋大学-XForce团队  版权所有"
+        android:text="广东海洋大学  X-Force团队  版权所有"
         android:textColor="#858585"
         android:textSize="15sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Copyright ©2013 XForce Team. All Rights Reserved."
+        android:text="Copyright ©2013 X-Force Team. All Rights Reserved."
         android:textColor="#858585"
         android:textSize="13sp" />
     

@@ -12,6 +12,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -61,6 +62,8 @@ import com.umeng.socialize.controller.UMSsoHandler;
 import com.umeng.socialize.controller.UMWXHandler;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.sso.SinaSsoHandler;
+import com.umeng.update.UmengDownloadListener;
+import com.umeng.update.UmengUpdateAgent;
 import com.xforce.supernotepad.dao.NoteDetailDao;
 import com.xforce.supernotepad.dao.NoteTypeDao;
 import com.xforce.supernotepad.dao.PictureDao;
@@ -85,10 +88,12 @@ public class MainActivity extends Activity implements OnClickListener,
 	private static final int SELECT_GROUP = 6;// 选择需要移动到的分组框
 	private static final int CREATE_PASSWD = 7;// 创建密码输入框
 	private static final int INPUT_PASSWD = 8;// 输入密码框
+	private static final int UPDATE =12;//更新框
 
 	private static final int CALENDAR = 9;// calendar的activity的标识符
 	private static final int ADDNOTE = 10;// AddActivity的标识符
 	private static final int EDITNOTE = 11;// EditActivity的标识符
+	
 	private RelativeLayout editTopLayout, searchTitle;
 	private LinearLayout bottomLayout;// 底部选择操作布局
 	private ListView noteListView;
@@ -131,6 +136,8 @@ public class MainActivity extends Activity implements OnClickListener,
 	SharedPreferences sharedPreferences = null;// 读取系统设置
 	FeedbackAgent agent;// 用户反馈
 	UMSocialService umSocialService;// app分享
+	
+	ProgressDialog updateProgressDialog;//更新进度框
 
 	int nowPosition = 0;// 当前用户点击选择的item的position
 	// 每个note的颜色
@@ -141,6 +148,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	private long exitTime = 0;// 退出时间
 
 	private String orderString = "desc";// 记事本排列顺序，默认为逆序
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -164,6 +172,9 @@ public class MainActivity extends Activity implements OnClickListener,
 		umSocialService = UMServiceFactory.getUMSocialService(
 				MainActivity.class.getName(), RequestType.SOCIAL);
 		umSocialService.getConfig().setSinaSsoHandler(new SinaSsoHandler());
+		
+		//检查更新
+		UmengUpdateAgent.update(this);
 
 		// 读取系统设置
 		sharedPreferences = getSharedPreferences("setting", MODE_PRIVATE);
@@ -215,6 +226,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		// 停止友盟统计
 		// MobclickAgent.onPause(this);
 	}
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -1045,6 +1057,14 @@ public class MainActivity extends Activity implements OnClickListener,
 			builder.setView(linearLayout);
 
 			return builder.create();
+			
+		case UPDATE:
+			updateProgressDialog = new ProgressDialog(MainActivity.this);
+			updateProgressDialog.setMessage("正在下载更新包...");
+			updateProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			updateProgressDialog.setCancelable(false);
+			updateProgressDialog.show();
+			return updateProgressDialog;
 		}
 		return super.onCreateDialog(id);
 	}

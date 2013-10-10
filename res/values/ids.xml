@@ -18,6 +18,9 @@
     <!-- 返回按钮id -->
     <item type="id" name="backbtn">false</item>
     
+    <!-- 显示版本号 -->
+    <item type="id" name="version_tv">false</item>
+    
     <!-- 侧栏 -->
     <item type="id" name="nowdate_tv">false</item>
     <item type="id" name="searchbtn_sidebar">false</item>
