@@ -6,8 +6,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.umeng.analytics.MobclickAgent;
 
 public class AboutActivity extends Activity {
 	TextView backButton;
@@ -20,9 +21,9 @@ public class AboutActivity extends Activity {
 		setContentView(R.layout.about_layout);
 
 		backButton = (TextView) findViewById(R.id.backbtn);
-		versionView=(TextView) findViewById(R.id.version_tv);
-		
-		versionView.setText("XNote记事本 "+getVersion());
+		versionView = (TextView) findViewById(R.id.version_tv);
+
+		versionView.setText("XNote记事本 " + getVersion());
 
 		backButton.setOnClickListener(new OnClickListener() {
 
@@ -33,8 +34,24 @@ public class AboutActivity extends Activity {
 		});
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// 开启友盟统计
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		// 停止友盟统计
+		MobclickAgent.onPause(this);
+	}
+
 	/**
 	 * 获取版本号
+	 * 
 	 * @return
 	 */
 	public String getVersion() {

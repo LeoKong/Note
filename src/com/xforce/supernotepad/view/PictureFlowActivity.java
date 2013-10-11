@@ -8,6 +8,7 @@ import java.util.List;
 import org.taptwo.android.widget.CircleFlowIndicator;
 import org.taptwo.android.widget.ViewFlow;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xforce.supernotepad.model.PictureModel;
 import com.xforce.supernotepad.util.Utils;
 
@@ -35,6 +36,21 @@ public class PictureFlowActivity extends Activity{
 		initViews();// 初始化组件
 		setups();// 时时监听图片的位置
 		
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// 开启友盟统计
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		// 停止友盟统计
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

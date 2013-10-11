@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xforce.supernotepad.util.PaintView;
 import com.xforce.supernotepad.util.Utils;
-
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -117,7 +117,7 @@ public class DrawPicActivity extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		screenWidth = dm.widthPixels;
 		screenHeight = dm.heightPixels;
-		g = (float) (screenWidth/360.0);
+		g = (float) (screenWidth / 360.0);
 		// 初始化所有内容
 		initViews();
 		// 取画布的宽高，通过对应layout的背景图片
@@ -142,6 +142,26 @@ public class DrawPicActivity extends Activity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// 开启友盟统计
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		// 回收bitmap空间
+		if (importBmp != null && !importBmp.isRecycled()) {
+			importBmp.recycle();
+		}
+		// 停止友盟统计
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 1, 0, "退出");
 		return true;
@@ -153,16 +173,6 @@ public class DrawPicActivity extends Activity {
 			this.finish();
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		// 回收bitmap空间
-		if (importBmp != null && !importBmp.isRecycled()) {
-			importBmp.recycle();
-		}
 	}
 
 	/**
@@ -224,23 +234,24 @@ public class DrawPicActivity extends Activity {
 				hidePopuCenterMenu();
 				hideColorPicker();
 				hideGraphPicker();
-				//提示框
-				final ProgressDialog progressDialog=new ProgressDialog(DrawPicActivity.this);
-				
+				// 提示框
+				final ProgressDialog progressDialog = new ProgressDialog(
+						DrawPicActivity.this);
+
 				progressDialog.setMessage("正在保存...");
-				//显示提示框
+				// 显示提示框
 				progressDialog.show();
-				
-				//接收线程结束的消息
+
+				// 接收线程结束的消息
 				final Handler handler = new Handler() {
 					public void handleMessage(Message message) {
 						progressDialog.dismiss();
 					}
 				};
-				
-				//开启线程保存图片
-				new Thread(){
-					public void run(){
+
+				// 开启线程保存图片
+				new Thread() {
+					public void run() {
 						String picString = savePic();
 						// 如果是新建一个张涂鸦则将图片名返回给addnoteactivity,否则直接退出
 						Intent intent = new Intent();
@@ -251,12 +262,12 @@ public class DrawPicActivity extends Activity {
 
 						mPaintView.clearAll();
 						DrawPicActivity.this.finish();
-						
+
 						Message message = handler.obtainMessage();
 						handler.sendMessage(message);
 					}
 				}.start();
-				
+
 				break;
 
 			// 工具按钮点击，后弹出画笔选择**********
@@ -412,7 +423,7 @@ public class DrawPicActivity extends Activity {
 	 * @see 根据日期保存图片
 	 * */
 	public String savePic() {
-		
+
 		String fileUrl = null;
 		String picName = null;
 		if (editPicPath != null) {
@@ -753,14 +764,15 @@ public class DrawPicActivity extends Activity {
 				startActivityForResult(openAlbumIntent, REQUEST_CODE);
 			} else if (which == 0) {
 				clearBg();
-			}else if(which == 2){
+			} else if (which == 2) {
 				System.out.println("choose take picture!");
-				Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				Intent openCameraIntent = new Intent(
+						MediaStore.ACTION_IMAGE_CAPTURE);
 				originalUri = Uri.fromFile(sdcardTempFile);
 				openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, originalUri);
 				REQUEST_CODE = TAKE_PIC;
 				startActivityForResult(openCameraIntent, REQUEST_CODE);
-				
+
 			}
 		}
 	}
@@ -772,7 +784,8 @@ public class DrawPicActivity extends Activity {
 			if (requestCode == IMPORT_PIC) {
 				ContentResolver resolver = getContentResolver();
 				originalUri = data.getData();
-				System.out.println(originalUri + "..." + sdcardTempFile.getAbsolutePath());
+				System.out.println(originalUri + "..."
+						+ sdcardTempFile.getAbsolutePath());
 				try {
 					importBmp = MediaStore.Images.Media.getBitmap(resolver,
 							originalUri);
@@ -870,10 +883,11 @@ public class DrawPicActivity extends Activity {
 				}
 				reloadPaintView(sdcardTempFile.getAbsolutePath());
 				REQUEST_CODE = IMPORT_PIC;
-				
-			}else if(requestCode == TAKE_PIC){
+
+			} else if (requestCode == TAKE_PIC) {
 				System.out.println("ok taking pic");
-				importBmp = BitmapFactory.decodeFile(sdcardTempFile.getAbsolutePath());
+				importBmp = BitmapFactory.decodeFile(sdcardTempFile
+						.getAbsolutePath());
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						DrawPicActivity.this);
 				builder.setTitle("相片操作");
@@ -884,12 +898,13 @@ public class DrawPicActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						switch (which) {
-						
+
 						case Dialog.BUTTON_POSITIVE:
 							System.out.println("BUTTON_POSITIVE");
 							Intent intent = new Intent(
 									"com.android.camera.action.CROP");
-							String uri = "file:/" + sdcardTempFile.getAbsolutePath();
+							String uri = "file:/"
+									+ sdcardTempFile.getAbsolutePath();
 							System.out.println("uri is " + uri);
 							Uri tmpUri = Uri.parse(uri);
 							intent.setDataAndType(tmpUri, "image/*");
@@ -904,20 +919,20 @@ public class DrawPicActivity extends Activity {
 							break;
 						case Dialog.BUTTON_NEGATIVE:
 							System.out.println("BUTTON_NEGATIVE");
-							//123123123123123123
+							// 123123123123123123
 							float scaleWidth = (float) ((BITMAP_WIDTH / 1.0) / (importBmp
 									.getWidth() / 1.0));
 							float scaleHeight = scaleWidth;
 							Matrix m = new Matrix();
 							m.postScale(scaleWidth, scaleHeight);
-							importBmp = Bitmap.createBitmap(importBmp, 0,
-									0, importBmp.getWidth(),
+							importBmp = Bitmap.createBitmap(importBmp, 0, 0,
+									importBmp.getWidth(),
 									importBmp.getHeight(), m, true);
 							FileOutputStream fos;
 							try {
 								fos = new FileOutputStream(sdcardTempFile);
-								importBmp.compress(CompressFormat.PNG, 100,
-										fos);
+								importBmp
+										.compress(CompressFormat.PNG, 100, fos);
 								fos.flush();
 								fos.close();
 							} catch (FileNotFoundException e) {
@@ -927,8 +942,7 @@ public class DrawPicActivity extends Activity {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							reloadPaintView(sdcardTempFile
-									.getAbsolutePath());
+							reloadPaintView(sdcardTempFile.getAbsolutePath());
 
 							break;
 						default:
@@ -939,8 +953,7 @@ public class DrawPicActivity extends Activity {
 				builder.setPositiveButton("是", tmpListener);
 				builder.setNegativeButton("否", tmpListener);
 				builder.show();
-				
-				
+
 			}
 		}
 	}
@@ -974,7 +987,7 @@ public class DrawPicActivity extends Activity {
 	public void clearBg() {
 		this.mPaintView.clearBgWithColor();
 	}
-	
+
 	public void checkButtonState() {
 		int size = mPaintView.getActionListCount();
 		int index = mPaintView.getCurrentPaintIndex();
@@ -986,7 +999,7 @@ public class DrawPicActivity extends Activity {
 				findViewById(R.id.tuya_clear_btn).setEnabled(false);
 				findViewById(R.id.tuya_clear_btn).setPressed(false);
 			}
-			if(!mPaintView.isHasBgbm()){
+			if (!mPaintView.isHasBgbm()) {
 				System.out.println("will running  here1");
 				findViewById(R.id.tuya_save_btn).setEnabled(false);
 				findViewById(R.id.tuya_save_btn).setPressed(false);
@@ -996,7 +1009,7 @@ public class DrawPicActivity extends Activity {
 			findViewById(R.id.paint_back_btn).setEnabled(true);
 			findViewById(R.id.tuya_clear_btn).setEnabled(true);
 			findViewById(R.id.tuya_save_btn).setEnabled(true);
-			
+
 		}
 
 		if (index == (size - 1)) {
@@ -1005,8 +1018,8 @@ public class DrawPicActivity extends Activity {
 		} else {
 			findViewById(R.id.paint_forward_btn).setEnabled(true);
 		}
-		
-		if( index == -1 && mPaintView.isHasBgbm()){
+
+		if (index == -1 && mPaintView.isHasBgbm()) {
 			findViewById(R.id.tuya_save_btn).setEnabled(false);
 			findViewById(R.id.tuya_save_btn).setPressed(false);
 		}

@@ -9,6 +9,7 @@ import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xforce.supernotepad.adapter.CalendarAdapter;
 import com.xforce.supernotepad.dao.NoteDetailDao;
 
@@ -68,6 +69,21 @@ public class CalendarActivity extends Activity implements OnClickListener {
 				dayStrings);
 		setCalendar(year, month);
 		calendarView.setAdapter(adapter);
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// 开启友盟统计
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		// 停止友盟统计
+		MobclickAgent.onPause(this);
 	}
 
 	public String adjust(String string) {

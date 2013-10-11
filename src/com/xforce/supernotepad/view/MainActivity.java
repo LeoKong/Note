@@ -88,12 +88,12 @@ public class MainActivity extends Activity implements OnClickListener,
 	private static final int SELECT_GROUP = 6;// 选择需要移动到的分组框
 	private static final int CREATE_PASSWD = 7;// 创建密码输入框
 	private static final int INPUT_PASSWD = 8;// 输入密码框
-	private static final int UPDATE =12;//更新框
+	private static final int UPDATE = 12;// 更新框
 
 	private static final int CALENDAR = 9;// calendar的activity的标识符
 	private static final int ADDNOTE = 10;// AddActivity的标识符
 	private static final int EDITNOTE = 11;// EditActivity的标识符
-	
+
 	private RelativeLayout editTopLayout, searchTitle;
 	private LinearLayout bottomLayout;// 底部选择操作布局
 	private ListView noteListView;
@@ -136,8 +136,8 @@ public class MainActivity extends Activity implements OnClickListener,
 	SharedPreferences sharedPreferences = null;// 读取系统设置
 	FeedbackAgent agent;// 用户反馈
 	UMSocialService umSocialService;// app分享
-	
-	ProgressDialog updateProgressDialog;//更新进度框
+
+	ProgressDialog updateProgressDialog;// 更新进度框
 
 	int nowPosition = 0;// 当前用户点击选择的item的position
 	// 每个note的颜色
@@ -148,7 +148,6 @@ public class MainActivity extends Activity implements OnClickListener,
 	private long exitTime = 0;// 退出时间
 
 	private String orderString = "desc";// 记事本排列顺序，默认为逆序
-	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -172,8 +171,8 @@ public class MainActivity extends Activity implements OnClickListener,
 		umSocialService = UMServiceFactory.getUMSocialService(
 				MainActivity.class.getName(), RequestType.SOCIAL);
 		umSocialService.getConfig().setSinaSsoHandler(new SinaSsoHandler());
-		
-		//检查更新
+
+		// 检查更新
 		UmengUpdateAgent.update(this);
 
 		// 读取系统设置
@@ -217,16 +216,15 @@ public class MainActivity extends Activity implements OnClickListener,
 		// 初始化gallery的索引值
 		AddNoteActivity.GALLERY_INDEX = 0;
 		// 开启友盟统计
-		// MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		// 停止友盟统计
-		// MobclickAgent.onPause(this);
+		MobclickAgent.onPause(this);
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -307,7 +305,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		showEmptyView = (LinearLayout) findViewById(R.id.showempty_view);
 		showSearchButton = (Button) findViewById(R.id.searchbtn_sidebar);
 		calendarButton = (Button) findViewById(R.id.calendarbtn_sidebar);
-		albumButton=(Button) findViewById(R.id.albumbtn_sidebar);
+		albumButton = (Button) findViewById(R.id.albumbtn_sidebar);
 		passwdButton = (Button) findViewById(R.id.passwdbtn_sidebar);
 		feedbackButton = (Button) findViewById(R.id.feedbackbtn_sidebar);
 		shareAppButton = (Button) findViewById(R.id.shareappbtn_sidebar);
@@ -328,7 +326,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		showSearchButton.setOnClickListener(this);
 		startSearchButton.setOnClickListener(this);
 		calendarButton.setOnClickListener(this);
-		albumButton.setOnClickListener(this);  
+		albumButton.setOnClickListener(this);
 		passwdButton.setOnClickListener(this);
 		feedbackButton.setOnClickListener(this);
 		shareAppButton.setOnClickListener(this);
@@ -550,16 +548,17 @@ public class MainActivity extends Activity implements OnClickListener,
 			break;
 
 		case R.id.albumbtn_sidebar:
-			PictureDao pictureDao=new PictureDao(this);
+			PictureDao pictureDao = new PictureDao(this);
 			if (pictureDao.checkHasPic()) {
 				intent = new Intent(MainActivity.this, AlbumActivity.class);
 				startActivity(intent);
-			}else {
-				Toast toast=Toast.makeText(this, "您的记事本中还没有添加相片哦！", Toast.LENGTH_SHORT);
+			} else {
+				Toast toast = Toast.makeText(this, "您的记事本中还没有添加相片哦！",
+						Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 			}
-			
+
 			break;
 
 		case R.id.passwdbtn_sidebar:
@@ -661,6 +660,22 @@ public class MainActivity extends Activity implements OnClickListener,
 			break;
 
 		case R.id.unlocked_btn_main:
+			boolean hasLocked=false;
+			//判断是否选中的记事本均未加锁
+			for (int i = 0; i < listAdapter.map.size(); i++) {
+				// 找出选中的记事本
+				if (listAdapter.map.get(i)) {
+					if (noteList.get(i).get("locked")
+							.toString().equals("1")) {
+						hasLocked=true;
+					}
+				}
+			}
+			//如果选中的都未加锁则直接返回
+			if (!hasLocked) {
+				Toast.makeText(MainActivity.this, "亲，没有加锁怎么解锁呢?!", Toast.LENGTH_SHORT).show();
+				return;
+			}
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(
 					MainActivity.this);
@@ -668,7 +683,6 @@ public class MainActivity extends Activity implements OnClickListener,
 			final EditText editText = new EditText(MainActivity.this);
 			editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 			editText.setHint("请输入密码");
-
 			builder.setNegativeButton("取消", null);
 			builder.setPositiveButton("确定",
 					new DialogInterface.OnClickListener() {
@@ -702,7 +716,6 @@ public class MainActivity extends Activity implements OnClickListener,
 					});
 
 			builder.setView(editText);
-
 			builder.show();
 
 			break;
@@ -1057,11 +1070,12 @@ public class MainActivity extends Activity implements OnClickListener,
 			builder.setView(linearLayout);
 
 			return builder.create();
-			
+
 		case UPDATE:
 			updateProgressDialog = new ProgressDialog(MainActivity.this);
 			updateProgressDialog.setMessage("正在下载更新包...");
-			updateProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			updateProgressDialog
+					.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			updateProgressDialog.setCancelable(false);
 			updateProgressDialog.show();
 			return updateProgressDialog;

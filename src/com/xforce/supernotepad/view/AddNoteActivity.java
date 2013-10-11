@@ -7,26 +7,11 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import com.xforce.supernotepad.dao.NoteDetailDao;
-import com.xforce.supernotepad.dao.PictureDao;
-import com.xforce.supernotepad.dao.VideoDao;
-import com.xforce.supernotepad.dao.VoiceDao;
-import com.xforce.supernotepad.model.NoteDetail;
-import com.xforce.supernotepad.model.PictureModel;
-import com.xforce.supernotepad.util.AlarmSetting;
-import com.xforce.supernotepad.util.FacePopView;
-import com.xforce.supernotepad.util.FileUtil;
-import com.xforce.supernotepad.util.GalleryPicAdapter;
-import com.xforce.supernotepad.util.SetTimeBuilder;
-import com.xforce.supernotepad.util.Utils;
-
-import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -42,17 +27,17 @@ import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
-import android.gesture.Prediction;
 import android.gesture.GestureOverlayView.OnGesturePerformedListener;
+import android.gesture.Prediction;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaRecorder;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,30 +51,35 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TimePicker;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.TimePicker.OnTimeChangedListener;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.umeng.analytics.MobclickAgent;
+import com.xforce.supernotepad.dao.NoteDetailDao;
+import com.xforce.supernotepad.dao.PictureDao;
+import com.xforce.supernotepad.dao.VideoDao;
+import com.xforce.supernotepad.dao.VoiceDao;
+import com.xforce.supernotepad.model.NoteDetail;
+import com.xforce.supernotepad.model.PictureModel;
+import com.xforce.supernotepad.util.AlarmSetting;
+import com.xforce.supernotepad.util.FacePopView;
+import com.xforce.supernotepad.util.FileUtil;
+import com.xforce.supernotepad.util.GalleryPicAdapter;
+import com.xforce.supernotepad.util.SetTimeBuilder;
+import com.xforce.supernotepad.util.Utils;
 
 public class AddNoteActivity extends Activity implements OnClickListener,
 		OnGesturePerformedListener {
@@ -198,6 +188,9 @@ public class AddNoteActivity extends Activity implements OnClickListener,
 			gallery.setSelection(GALLERY_INDEX);
 			initGallery();
 		}
+
+		// 开启友盟统计
+		MobclickAgent.onResume(this);
 
 		// 回收bitmap空间
 		// if (importBmp != null && !importBmp.isRecycled()) {
@@ -1634,6 +1627,9 @@ public class AddNoteActivity extends Activity implements OnClickListener,
 			voicePlayer.release();
 			voicePlayer = null;
 		}
+
+		// 停止友盟统计
+		MobclickAgent.onPause(this);
 
 		// 回收bitmap空间
 		if (importBmp != null && !importBmp.isRecycled()) {

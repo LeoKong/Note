@@ -2,6 +2,8 @@ package com.xforce.supernotepad.view;
 
 
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,6 +30,21 @@ public class ShowOnePicActivity extends Activity implements OnClickListener {
 		imageView.setImageBitmap(bitmap);
 		imageView.setOnClickListener(this);
 
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// 开启友盟统计
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		// 停止友盟统计
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

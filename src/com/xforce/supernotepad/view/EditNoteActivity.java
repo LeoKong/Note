@@ -3,6 +3,7 @@ package com.xforce.supernotepad.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xforce.supernotepad.dao.NoteDetailDao;
 import com.xforce.supernotepad.dao.PictureDao;
 import com.xforce.supernotepad.dao.VideoDao;
@@ -79,6 +80,21 @@ public class EditNoteActivity extends AddNoteActivity {
 		saveButton.setOnClickListener(saveButtOnClickListener);
 		backButton.setOnClickListener(backButtonClickListener);
 
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// 开启友盟统计
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		// 停止友盟统计
+		MobclickAgent.onPause(this);
 	}
 
 	/**

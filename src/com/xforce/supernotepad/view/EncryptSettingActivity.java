@@ -1,6 +1,7 @@
 package com.xforce.supernotepad.view;
 
 
+import com.umeng.analytics.MobclickAgent;
 import com.xforce.supernotepad.util.Utils;
 
 import android.app.Activity;
@@ -37,6 +38,21 @@ public class EncryptSettingActivity extends Activity implements
 		oldPasswdEditText.setOnFocusChangeListener(this);
 		newPasswdEditText.setOnFocusChangeListener(this);
 		confirmPasswdEditText.setOnFocusChangeListener(this);
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		// 开启友盟统计
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		// 停止友盟统计
+		MobclickAgent.onPause(this);
 	}
 
 	public void onClick(View view) {
