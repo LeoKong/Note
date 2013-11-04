@@ -66,7 +66,8 @@ public class CalendarAdapter extends BaseAdapter {
 		}
 		TextView dayView = (TextView) convertView.findViewById(R.id.daytext);
 		dayView.setText(dayStrings[position]);
-		dayView.setBackground(null);
+		dayView.setBackgroundDrawable(null);
+//		dayView.setBackground(null);
 
 		if (dayStrings[position] != null) {
 			String dateString=CalendarActivity.formatDate(year,

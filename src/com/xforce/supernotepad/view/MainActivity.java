@@ -231,6 +231,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
+		System.out.println("为什么没有");
 		switch (requestCode) {
 		case CALENDAR:
 			if (resultCode == RESULT_OK) {
@@ -649,7 +650,7 @@ public class MainActivity extends Activity implements OnClickListener,
 					}
 				}
 
-				Toast.makeText(MainActivity.this, "加锁成功！", Toast.LENGTH_LONG)
+				Toast.makeText(MainActivity.this, "加锁成功！", Toast.LENGTH_SHORT)
 						.show();
 				// 回到正常模式
 				toNormal();
@@ -703,14 +704,14 @@ public class MainActivity extends Activity implements OnClickListener,
 								}
 
 								Toast.makeText(MainActivity.this, "密码正确，解锁成功！",
-										Toast.LENGTH_LONG).show();
+										Toast.LENGTH_SHORT).show();
 
 								toNormal();
 								// 刷新列表
 								showListView();
 							} else {
 								Toast.makeText(MainActivity.this, "密码错误,解锁失败！",
-										Toast.LENGTH_LONG).show();
+										Toast.LENGTH_SHORT).show();
 							}
 						}
 					});
@@ -934,7 +935,7 @@ public class MainActivity extends Activity implements OnClickListener,
 											.toString().equals("1")) {
 										Toast.makeText(MainActivity.this,
 												"选中的记事本中包含锁定记事，不能进行删除！",
-												Toast.LENGTH_LONG).show();
+												Toast.LENGTH_SHORT).show();
 										return;
 									}
 								}
@@ -1044,10 +1045,13 @@ public class MainActivity extends Activity implements OnClickListener,
 										EditNoteActivity.class);
 								intent.putExtra("nid", noteList
 										.get(nowPosition).get("nid").toString());
-								startActivity(intent);
+								startActivityForResult(intent, EDITNOTE);
 
 								Toast.makeText(MainActivity.this, "密码正确!",
 										Toast.LENGTH_SHORT).show();
+								
+								// 清空输入框
+								inputEditText.setText("");
 
 							} else {
 								keepDialog(dialog);
@@ -1055,8 +1059,6 @@ public class MainActivity extends Activity implements OnClickListener,
 
 							}
 
-							// 清空输入框
-							inputEditText.setText("");
 						}
 					});
 			builder.setNegativeButton("取消",
@@ -1109,7 +1111,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			selectedTypeId = radioButton.getId();
 			showDialog(SELECT_OPR);
 		} else {
-			Toast.makeText(MainActivity.this, "该分组不允许修改！", Toast.LENGTH_LONG)
+			Toast.makeText(MainActivity.this, "该分组不允许修改！", Toast.LENGTH_SHORT)
 					.show();
 		}
 		return false;

@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
@@ -1089,10 +1090,11 @@ public class AddNoteActivity extends Activity implements OnClickListener,
 		case R.id.facebtn:
 			facePopView = new FacePopView(AddNoteActivity.this, imageId,
 					itemClickListener);
-			// 让软键盘消失
-			((InputMethodManager) getApplicationContext().getSystemService(
-					Context.INPUT_METHOD_SERVICE)).toggleSoftInput(0,
-					InputMethodManager.HIDE_NOT_ALWAYS);
+			// 如果键盘显示，则让其消失
+			((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+					.hideSoftInputFromWindow(AddNoteActivity.this
+							.getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
 
 			facePopView.setFocusable(true);
 			facePopView.setTouchable(true);
