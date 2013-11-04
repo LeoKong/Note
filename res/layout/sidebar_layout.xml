@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- 侧栏的布局 -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#3C4D61"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@id/nowdate_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="15sp" />
+            
+            <Button
+                android:id="@id/searchbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="搜索" />
+            
+            <!-- 分割线 -->
+            <include layout="@layout/line" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="分组"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+            <RadioGroup
+                android:id="@id/typegroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+            </RadioGroup>
+
+            <ImageButton
+                android:id="@id/addtype_btn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radiobtn_selector"
+                android:padding="10dp"
+                android:src="@drawable/addnote" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="个性化"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+            
+            <Button
+                android:id="@id/calendarbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="日历浏览" />
+            
+            <Button
+                android:id="@id/albumbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="图片相册" />
+
+            <Button
+                android:id="@id/passwdbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="密码管理" />
+            
+            <Button
+                android:id="@id/feedbackbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="用户反馈" />
+            
+            <Button
+                android:id="@id/shareappbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="一键分享" />
+            
+            <Button
+                android:id="@id/aboutbtn_sidebar"
+                style="@style/sidebar_btn_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="关于" />
+        </LinearLayout>
+    </ScrollView>
+    
+
+</LinearLayout>

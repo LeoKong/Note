@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ import cn.yunzhisheng.basic.USCRecognizerDialog;
 import cn.yunzhisheng.basic.USCRecognizerDialogListener;
 import cn.yunzhisheng.common.USCError;
 
+import com.slidingmenu.lib.SlidingMenu;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.socialize.controller.RequestType;
@@ -73,7 +75,6 @@ import com.xforce.supernotepad.model.NoteDetail;
 import com.xforce.supernotepad.model.PictureModel;
 import com.xforce.supernotepad.util.FaceParser;
 import com.xforce.supernotepad.util.FileUtil;
-import com.xforce.supernotepad.util.SlideHolder;
 import com.xforce.supernotepad.util.TypeRadioButton;
 import com.xforce.supernotepad.util.Utils;
 
@@ -100,7 +101,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	private MyListAdapter listAdapter = null;
 	private LinearLayout showEmptyView;
 
-	private SlideHolder mSlideHolder;// 侧栏控件
+	private SlidingMenu slidingMenu;// 侧栏控件
 
 	private ImageButton seeAllButton, addNoteButton, addTypeButton,
 			startSearchButton, voiceSearchButton;// 显示侧栏按钮，添加记事本按钮，添加新组按钮，开始搜索按钮，语音输入按钮
@@ -286,7 +287,17 @@ public class MainActivity extends Activity implements OnClickListener,
 	 * 初始化控件
 	 */
 	public void initWidget() {
-		mSlideHolder = (SlideHolder) findViewById(R.id.slideHolder);
+		slidingMenu = new SlidingMenu(this);
+		slidingMenu.setMode(SlidingMenu.LEFT);
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		slidingMenu.setBehindScrollScale(0);
+		slidingMenu.setFadeDegree(1f);
+		slidingMenu.setFadeEnabled(true);
+		slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+
+		slidingMenu.setBehindOffset(getScreenWidth()/2);
+		slidingMenu.setMenu(R.layout.sidebar_layout);
+
 		editTopLayout = (RelativeLayout) findViewById(R.id.edit_top_title);
 		searchTitle = (RelativeLayout) findViewById(R.id.main_top_search);
 		bottomLayout = (LinearLayout) findViewById(R.id.main_bottom);
@@ -443,7 +454,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		Intent intent = null;
 		switch (v.getId()) {
 		case R.id.seeallbtn:
-			mSlideHolder.toggle();
+			slidingMenu.toggle();
 			break;
 
 		case R.id.addnotebtn:
@@ -506,7 +517,7 @@ public class MainActivity extends Activity implements OnClickListener,
 						Toast.LENGTH_SHORT).show();
 			} else {
 				// 收取侧栏
-				mSlideHolder.toggle();
+				slidingMenu.toggle();
 				toSearch();
 			}
 
@@ -540,7 +551,7 @@ public class MainActivity extends Activity implements OnClickListener,
 
 		case R.id.calendarbtn_sidebar:
 			// 收起侧栏
-			mSlideHolder.toggle();
+			slidingMenu.toggle();
 			// 选中“全部”
 			SelectOneType(0);
 			intent = new Intent(MainActivity.this, CalendarActivity.class);
@@ -661,20 +672,20 @@ public class MainActivity extends Activity implements OnClickListener,
 			break;
 
 		case R.id.unlocked_btn_main:
-			boolean hasLocked=false;
-			//判断是否选中的记事本均未加锁
+			boolean hasLocked = false;
+			// 判断是否选中的记事本均未加锁
 			for (int i = 0; i < listAdapter.map.size(); i++) {
 				// 找出选中的记事本
 				if (listAdapter.map.get(i)) {
-					if (noteList.get(i).get("locked")
-							.toString().equals("1")) {
-						hasLocked=true;
+					if (noteList.get(i).get("locked").toString().equals("1")) {
+						hasLocked = true;
 					}
 				}
 			}
-			//如果选中的都未加锁则直接返回
+			// 如果选中的都未加锁则直接返回
 			if (!hasLocked) {
-				Toast.makeText(MainActivity.this, "亲，没有加锁怎么解锁呢?!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, "亲，没有加锁怎么解锁呢?!",
+						Toast.LENGTH_SHORT).show();
 				return;
 			}
 
@@ -1049,7 +1060,7 @@ public class MainActivity extends Activity implements OnClickListener,
 
 								Toast.makeText(MainActivity.this, "密码正确!",
 										Toast.LENGTH_SHORT).show();
-								
+
 								// 清空输入框
 								inputEditText.setText("");
 
@@ -1339,8 +1350,8 @@ public class MainActivity extends Activity implements OnClickListener,
 						public void onClick(View arg0) {
 							// TODO Auto-generated method stub
 							// 如果当前侧栏为显示状态，先让侧栏收起
-							if (mSlideHolder.isOpened()) {
-								mSlideHolder.toggle();
+							if (slidingMenu.isActivated()) {
+								slidingMenu.toggle();
 							} else {
 								Intent intent = new Intent(MainActivity.this,
 										ShowOnePicActivity.class);
@@ -1507,7 +1518,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		}
 
 		// 恢复侧栏可用
-		mSlideHolder.setEnabled(true);
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		seeAllButton.setEnabled(true);// 恢复侧栏按钮可用
 		addNoteButton.setEnabled(true);// 恢复添加按钮可用
 	}
@@ -1529,7 +1540,7 @@ public class MainActivity extends Activity implements OnClickListener,
 				R.anim.push_top_in));
 
 		// 侧栏不可用
-		mSlideHolder.setEnabled(false);
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 		seeAllButton.setEnabled(false);// 侧栏按钮不可用
 		addNoteButton.setEnabled(false);// 添加按钮不可用
 		// 必定选择了一项，所以全部按钮都为可见
@@ -1580,6 +1591,15 @@ public class MainActivity extends Activity implements OnClickListener,
 		public LinearLayout noteItemLayout = null;
 	}
 
+	/*
+	 * 获取屏幕宽度
+	 */
+	public int getScreenWidth() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.widthPixels;
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
@@ -1587,8 +1607,8 @@ public class MainActivity extends Activity implements OnClickListener,
 				|| keyCode == KeyEvent.KEYCODE_HOME) {
 
 			// 如果此时侧栏展开，则让其收起
-			if (mSlideHolder.isOpened()) {
-				mSlideHolder.toggle();
+			if (slidingMenu.isActivated()) {
+				slidingMenu.toggle();
 				// 返回true让程序不退出
 				return true;
 			}

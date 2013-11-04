@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- slidingMenu中的id -->
+    <item name="selected_view" type="id"/>
 
     <item name="bottom_menu" type="id">false</item>
     <!-- 颜色画板按钮的id -->
